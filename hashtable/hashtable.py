@@ -77,6 +77,8 @@ class HashTable:
 
         Implement this.
         """
+        index = self.hash_index(key)
+        return self.storage[index]
 
     def resize(self):
         """
