@@ -66,6 +66,8 @@ class HashTable:
 
         Implement this.
         """
+        index = self.hash_index(key)
+        self.storage[index] = None
 
     def get(self, key):
         """
