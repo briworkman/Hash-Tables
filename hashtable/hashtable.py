@@ -34,6 +34,10 @@ class HashTable:
 
         Implement this, and/or FNV-1.
         """
+        hash_value = 5382
+        for c in key:
+            hash_value = (hash_value * 33) + ord(c)
+        return hash_value
 
     def hash_index(self, key):
         """
