@@ -17,6 +17,10 @@ class HashTable:
     Implement this.
     """
 
+    def __init__(self, capacity):
+        self.capactiy = capacity
+        self.storage = [None] * capacity
+
     def fnv1(self, key):
         """
         FNV-1 64-bit hash function
@@ -36,7 +40,7 @@ class HashTable:
         Take an arbitrary key and return a valid integer index
         between within the storage capacity of the hash table.
         """
-        #return self.fnv1(key) % self.capacity
+        # return self.fnv1(key) % self.capacity
         return self.djb2(key) % self.capacity
 
     def put(self, key, value):
@@ -47,6 +51,8 @@ class HashTable:
 
         Implement this.
         """
+        index = self.key
+        value = self[index]
 
     def delete(self, key):
         """
@@ -73,6 +79,7 @@ class HashTable:
 
         Implement this.
         """
+
 
 if __name__ == "__main__":
     ht = HashTable(2)
