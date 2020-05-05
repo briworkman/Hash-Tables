@@ -18,7 +18,7 @@ class HashTable:
 
     def __init__(self, capacity):
         self.capacity = capacity
-        self.storage = [None] * self.capacity
+        self.storage = [None] * capacity
 
     def fnv1(self, key):
         """
@@ -36,14 +36,18 @@ class HashTable:
         DJB2 32-bit hash function
         Implement this, and/or FNV-1.
         """
+        hash_value = 5382
+        for c in key:
+            hash_value = (hash_value * 33) + ord(c)
+        return hash_value
 
     def hash_index(self, key):
         """
         Take an arbitrary key and return a valid integer index
         between within the storage capacity of the hash table.
         """
-        # return self.djb2(key) % self.capacity
-        return self.fnv1(key) % self.capacity
+        return self.djb2(key) % self.capacity
+        # return self.fnv1(key) % self.capacity
 
     def put(self, key, value):
         """
@@ -52,7 +56,18 @@ class HashTable:
         Implement this.
         """
         index = self.hash_index(key)
-        self.storage[index] = HashTableEntry(key, value)
+        node = self.storage[index]
+        if node is None:
+            self.storage[index] = HashTableEntry(key, value)
+            return
+        prev = node
+        while node is not None and node.key != key:
+            prev = node
+            node = node.next
+        if prev.key == key:
+            prev.value = value
+        else:
+            prev.next = HashTableEntry(key, value)
 
     def delete(self, key):
         """
@@ -61,7 +76,14 @@ class HashTable:
         Implement this.
         """
         index = self.hash_index(key)
-        self.storage[index] = None
+        node = self.storage[index]
+
+        if node.key == key:
+            self.storage[index] = node.next
+        while node.next is not None and node.key != key:
+            next = node.next
+            if next.key == key:
+                node.next = next.next
 
     def get(self, key):
         """
@@ -70,10 +92,13 @@ class HashTable:
         Implement this.
         """
         index = self.hash_index(key)
-        if self.storage[index] == None:
+        node = self.storage[index]
+        while node is not None and node.key != key:
+            node = node.next
+        if node is None:
             return None
         else:
-            return self.storage[index].value
+            return node.value
 
     def resize(self):
         """
