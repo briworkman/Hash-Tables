@@ -55,18 +55,17 @@ class HashTable:
         Hash collisions should be handled with Linked List Chaining.
         Implement this.
         """
-        index = self.hash_index(key)
+        index = self.hash_index(key)  # * Find the hash index
         node = self.storage[index]
-        if node is None:
+        if node is None:  # * If there is no node, add one
             self.storage[index] = HashTableEntry(key, value)
             return
         prev = node
-        while node is not None and node.key != key:
-            prev = node
+        while node is not None and node.key != key:  # * Search the list for the key
             node = node.next
-        if prev.key == key:
+        if prev.key == key:  # * if it's there, replace the value
             prev.value = value
-        else:
+        else:  # * if it's not there, append a new record to the list
             prev.next = HashTableEntry(key, value)
 
     def delete(self, key):
@@ -75,15 +74,15 @@ class HashTable:
         Print a warning if the key is not found.
         Implement this.
         """
-        index = self.hash_index(key)
+        index = self.hash_index(key)  # * Find the hash index
         node = self.storage[index]
 
+        while node.next is not None and node.key != key:  # * Search the list for the key
+            next = node.next
+            if next.key == key:  # * if found, delete the node from the list
+                node.next = next.next
         if node.key == key:
             self.storage[index] = node.next
-        while node.next is not None and node.key != key:
-            next = node.next
-            if next.key == key:
-                node.next = next.next
 
     def get(self, key):
         """
@@ -91,13 +90,13 @@ class HashTable:
         Returns None if the key is not found.
         Implement this.
         """
-        index = self.hash_index(key)
+        index = self.hash_index(key)  # * Find the hash index
         node = self.storage[index]
-        while node is not None and node.key != key:
+        while node is not None and node.key != key:  # * search the list for the key
             node = node.next
-        if node is None:
+        if node is None:  # * if not found, return None
             return None
-        else:
+        else:  # * if found, return the value
             return node.value
 
     def resize(self):
@@ -113,7 +112,7 @@ class HashTable:
             if i == None:
                 continue
             else:
-                self.put(i.key, i.value)
+                self.put(i.key)
 
 
 if __name__ == "__main__":
