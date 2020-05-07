@@ -10,8 +10,8 @@ Implement a basic hash table without collision resolution.
 
    Recommend either of:
 
-   * DJB2
-   * FNV-1 (64-bit)
+   - DJB2
+   - FNV-1 (64-bit)
 
 3. Implement the `hash_index()` that returns an index value for a key.
 
@@ -20,7 +20,7 @@ Implement a basic hash table without collision resolution.
 You can test this with:
 
 ```
-python test_hashtable_no_collisions.py
+python3 test_hashtable_no_collisions.py
 ```
 
 The above test program is _unlikely_ to have collisions, but it's
@@ -38,7 +38,7 @@ Implement linked-list chaining for collision resolution.
 You can test this with:
 
 ```
-python test_hashtable.py
+python3 test_hashtable.py
 ```
 
 ## Day 3
@@ -63,10 +63,10 @@ For these, you can use either the built-in `dict` type, or the hashtable
 you built. (Some of these are easier with `dict` since it's more
 full-featured.)
 
-* [Lookup Table](applications/lookup_table/)
-* [Expensive Sequence](applications/expensive_seq/)
-* [Word Count](applications/word_count/)
-* [No Duplicates](applications/no_dups/)
-* [Markov Chains](applications/markov/)
-* [Histogram](applications/histo/)
-* [Sum and Difference](applications/sumdiff/)
+- [Lookup Table](applications/lookup_table/)
+- [Expensive Sequence](applications/expensive_seq/)
+- [Word Count](applications/word_count/)
+- [No Duplicates](applications/no_dups/)
+- [Markov Chains](applications/markov/)
+- [Histogram](applications/histo/)
+- [Sum and Difference](applications/sumdiff/)
