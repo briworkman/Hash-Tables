@@ -99,39 +99,49 @@ class HashTable:
         else:  # * if found, return the value
             return node.value
 
-    def resize(self):
+    def resize(self, new_capacity):
         """
         Doubles the capacity of the hash table and
         rehash all key/value pairs.
         Implement this.
         """
         old_storage = self.storage
-        self.capacity *= 2
+        self.capacity = new_capacity
         self.storage = [None] * self.capacity
-        for i in old_storage:
-            if i == None:
-                continue
-            else:
-                self.put(i.key)
+
+        for i in range(len(old_storage)):
+            if old_storage[i] is not None:
+                current = old_storage[i]
+                while current is not None:
+                    key, value = current.key, current.value
+                    self.put(key, value)
+                    current = current.next
 
 
 if __name__ == "__main__":
     ht = HashTable(2)
+
     ht.put("line_1", "Tiny hash table")
     ht.put("line_2", "Filled beyond capacity")
     ht.put("line_3", "Linked list saves the day!")
+
     print("")
+
     # Test storing beyond capacity
     print(ht.get("line_1"))
     print(ht.get("line_2"))
     print(ht.get("line_3"))
+
     # Test resizing
     old_capacity = len(ht.storage)
     ht.resize()
     new_capacity = len(ht.storage)
+
     print(f"\nResized from {old_capacity} to {new_capacity}.\n")
+
     # Test if data intact after resizing
     print(ht.get("line_1"))
     print(ht.get("line_2"))
     print(ht.get("line_3"))
+
     print("")
